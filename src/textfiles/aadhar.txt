@@ -1,0 +1,240 @@
+import React, { useState } from "react";
+import "./App.css";
+
+const App = () => {
+  const [step, setStep] = useState(1);
+  const [formData, setFormData] = useState({
+    fullName: "",
+    aadharNumber: "",
+    dob: "",
+    email: "",
+    address: "",
+    photo: null,
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleFileChange = (e) => {
+    setFormData({ ...formData, photo: e.target.files[0] });
+  };
+
+  const nextStep = () => {
+    if (step < 3) setStep(step + 1);
+  };
+
+  const prevStep = () => {
+    if (step > 1) setStep(step - 1);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Form Submitted:", formData);
+    alert("Form submitted successfully!");
+  };
+
+  return (
+    <div className="form-container">
+      <h1>Aadhar Card Registration</h1>
+      <div className="progress-bar">
+        <div style={{ width: `${(step / 3) * 100}%` }}></div>
+      </div>
+
+      <form onSubmit={handleSubmit}>
+        {step === 1 && (
+          <div className="form-step">
+            <label>
+              Full Name:
+              <input
+                type="text"
+                name="fullName"
+                value={formData.fullName}
+                onChange={handleChange}
+                placeholder="Enter your full name"
+                required
+              />
+            </label>
+            <label>
+              Aadhar Number:
+              <input
+                type="text"
+                name="aadharNumber"
+                value={formData.aadharNumber}
+                onChange={handleChange}
+                placeholder="Enter 12-digit Aadhar Number"
+                maxLength="12"
+                pattern="\d{12}"
+                required
+              />
+            </label>
+            <label>
+              Date of Birth:
+              <input
+                type="date"
+                name="dob"
+                value={formData.dob}
+                onChange={handleChange}
+                required
+              />
+            </label>
+          </div>
+        )}
+
+        {step === 2 && (
+          <div className="form-step">
+            <label>
+              Email:
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="Enter your email"
+                required
+              />
+            </label>
+            <label>
+              Address:
+              <textarea
+                name="address"
+                value={formData.address}
+                onChange={handleChange}
+                placeholder="Enter your address"
+                required
+              ></textarea>
+            </label>
+          </div>
+        )}
+
+        {step === 3 && (
+          <div className="form-step">
+            <label>
+              Upload Profile Photo:
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleFileChange}
+                required
+              />
+            </label>
+            {formData.photo && <p>Selected File: {formData.photo.name}</p>}
+          </div>
+        )}
+
+        <div className="button-group">
+          {step > 1 && (
+            <button type="button" onClick={prevStep}>
+              Previous
+            </button>
+          )}
+          {step < 3 && (
+            <button type="button" onClick={nextStep}>
+              Next
+            </button>
+          )}
+          {step === 3 && <button type="submit">Submit</button>}
+        </div>
+      </form>
+    </div>
+  );
+};
+
+export default App;
+
+
+body {
+    font-family: "Arial", sans-serif;
+    background: #f7f9fc;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .form-container {
+    width: 400px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .progress-bar {
+    height: 5px;
+    background: #e0e0e0;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  
+  .progress-bar div {
+    height: 100%;
+    background: #6a11cb;
+    transition: width 0.3s;
+  }
+  
+  label {
+    display: block;
+    margin: 10px 0;
+    font-weight: bold;
+    color: #555;
+  }
+  
+  input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  textarea {
+    resize: none;
+    height: 80px;
+  }
+  
+  .file-upload {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border: 2px dashed #ccc;
+    border-radius: 5px;
+    color: #888;
+    cursor: pointer;
+  }
+  
+  button {
+    padding: 10px 15px;
+    margin: 5px;
+    background: #6a11cb;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background: #2575fc;
+  }
+  
+  button svg {
+    margin: 0 5px;
+  }
+  
+  button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+  }
+  
