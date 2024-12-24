@@ -499,3 +499,6 @@ button {
   -ms-transform: scale(95%);
   transform: scale(95%);
 }
+.submitted{
+  display: none;
+}

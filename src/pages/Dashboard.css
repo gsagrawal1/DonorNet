@@ -1,0 +1,92 @@
+.dashboard{
+    height: 100%;
+    width: 100%;
+    background-size: 100% 100%;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+    gap: 30px;
+}
+.dataDiv{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+.searchbar{
+    height: 70px;
+    padding: 10px;
+    width: 100%;
+    background: white;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+.searchbar input{
+    height: 100%;
+    display: flex;
+    flex-grow: 1;
+    font-size: 18px;
+    font-weight: 500;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    letter-spacing: 0.5px;
+    padding: 5px;
+}
+.searchbar span{
+    font-size: 26px;
+    padding: 0 10px;
+}
+.donorCard{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.donorCardTop{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 15px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-style: normal;
+    letter-spacing: 0.6px;
+    justify-content: space-between;
+    cursor: pointer;
+}
+.donorCardTop span:last-child{
+    font-weight: 400;
+}
+.donorCardBottom {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(179, 189, 181, 0.672);
+    border-radius: 0 0 8px 8px;
+    max-height: 0;
+    overflow: hidden;
+    padding: 0;
+    opacity: 0;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out, padding 0.4s ease-in-out;
+}
+
+.donorCardBottom.expand {
+    max-height: 1000px;
+    opacity: 1;
+    padding: 15px;
+    transform: scaleY(1);
+}
+
+.donorCardBottom h3{
+  font-size: 20px;
+  font-weight: 600;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-decoration: underline;
+} 
